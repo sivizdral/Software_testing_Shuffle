@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Credits.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Java03_Shuffle (Jan 16, 2022 9:29:23 PM)</a> &gt; <a href="../../index.html" class="el_group">Java03_Shuffle</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">shuff</a> &gt; <span class="el_source">Credits.java</span></div><h1>Credits.java</h1><pre class="source lang-java linenums">/*
+ * Credits.java
+ *
+ * Created on March 1, 2008, 10:55 PM
+ */
+
+package shuff;
+
+import java.io.*;
+import java.lang.*;
+
+/**
+ *
+ * @author  P.Sakthivel
+ */
+public class Credits implements Comparable , Serializable
+{
+    
+    /** Creates a new instance of Credits */
+    private String player_ ;
+    private int seconds_ ;
+    private int moves_ ;
+    private String timeString_ ;
+    private int level_ ;
+<span class="fc" id="L25">    public Credits( int seconds , int moves , int level )</span>
+    {
+<span class="fc" id="L27">        seconds_ = seconds ;</span>
+<span class="fc" id="L28">        moves_ = moves ;</span>
+<span class="fc" id="L29">        level_ = level ;</span>
+<span class="fc" id="L30">        prepareTimeString() ;</span>
+<span class="fc" id="L31">    }</span>
+    
+    public void prepareTimeString()
+    {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if( seconds_ != 0.0d )</span>
+        {
+<span class="fc" id="L37">            int min = ( int ) ( seconds_ / 60.0f ) ;</span>
+<span class="fc" id="L38">            int seconds = ( int ) ( seconds_ % 60 ) ;</span>
+<span class="fc" id="L39">            StringBuffer timeString = new StringBuffer() ;</span>
+<span class="fc" id="L40">            timeString.append( min ) ;</span>
+<span class="fc" id="L41">            timeString.append( ':' ) ;</span>
+<span class="fc" id="L42">            timeString.append( seconds ) ;</span>
+<span class="fc" id="L43">            timeString_ = timeString.toString() ;</span>
+        }
+<span class="fc" id="L45">    }</span>
+    
+    public int getTimeInSeconds()
+    {
+<span class="fc" id="L49">        return seconds_ ;</span>
+    }
+    public int getLevel()
+    {
+<span class="fc" id="L53">        return level_ ;</span>
+    }
+    public String getPlayer()
+    {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        return player_ == null ? &quot;&quot; : player_ ;</span>
+    }
+    
+    public void setPlayer( String player )
+    {
+<span class="fc" id="L62">        player_ = player ;</span>
+<span class="fc" id="L63">    }</span>
+    
+    public String getTime()
+    {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        return seconds_ != 0.0d ? timeString_ : &quot;&quot; ;</span>
+    }
+    
+    public int getMoves()
+    {
+<span class="fc" id="L72">        return moves_ ;</span>
+    }
+    
+    public int compareTo(Object o )
+    {
+<span class="fc" id="L77">        Credits c1 = ( Credits ) o ;</span>
+<span class="fc" id="L78">        int cmp = compare( seconds_ , c1.seconds_ ) ;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if( cmp == 0 )</span>
+        {
+<span class="fc" id="L81">            int cmp1 = compare( moves_ , c1.moves_ ) ;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            if( cmp1 == 0 )</span>
+            {
+<span class="fc" id="L84">                return getPlayer().compareToIgnoreCase( c1.getPlayer() ) ;</span>
+            }
+<span class="fc" id="L86">            return cmp1 ;</span>
+        }
+<span class="fc" id="L88">        return cmp ;</span>
+    }
+    
+    public int compare( double d1 , double d2 )
+    {
+<span class="fc bfc" id="L93" title="All 4 branches covered.">        return d1 &gt; d2 ? 1 : ( ( d1 &lt; d2 ) ? -1 : 0 ) ;</span>
+    }
+    
+    public int compare( int d1 , int d2 )
+    {
+<span class="fc bfc" id="L98" title="All 4 branches covered.">        return d1 &gt; d2 ? 1 : ( ( d1 &lt; d2 ) ? -1 : 0 ) ;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Java03_Shuffle (Jan 16, 2022 9:29:23 PM)</div></body></html>

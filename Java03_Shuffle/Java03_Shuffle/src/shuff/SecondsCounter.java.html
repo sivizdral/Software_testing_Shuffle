@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SecondsCounter.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Java03_Shuffle (Jan 16, 2022 9:29:23 PM)</a> &gt; <a href="../../index.html" class="el_group">Java03_Shuffle</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">shuff</a> &gt; <span class="el_source">SecondsCounter.java</span></div><h1>SecondsCounter.java</h1><pre class="source lang-java linenums">/*
+ * SecondsCounter.java
+ *
+ * Created on March 17, 2008, 12:51 AM
+ */
+
+package shuff;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.Timer;
+
+/**
+ *
+ * @author  P.Sakthivel
+ */
+public class SecondsCounter implements ActionListener
+{
+    public Timer timer_ ;
+    public StringBuffer text_ ;
+    public int counter ;
+    public JLabel secondsCounterLabel ;
+<span class="fc" id="L24">    public SecondsCounter()</span>
+    {
+<span class="fc" id="L26">        timer_ = new Timer( 1000 , this ) ;</span>
+<span class="fc" id="L27">        initCounter() ;</span>
+<span class="fc" id="L28">    }</span>
+    
+    public void setLabel( JLabel label )
+    {
+<span class="fc" id="L32">        secondsCounterLabel = label ;</span>
+<span class="fc" id="L33">    }</span>
+    public void initCounter()
+    {
+<span class="fc" id="L36">        counter = 0 ;</span>
+<span class="fc" id="L37">    }</span>
+    public void reStart()
+    {
+<span class="fc" id="L40">        stop() ;</span>
+<span class="fc" id="L41">        start() ;</span>
+<span class="fc" id="L42">    }</span>
+    
+    public void start()
+    {
+<span class="fc" id="L46">        initCounter() ;</span>
+<span class="fc" id="L47">        secondsCounterLabel.setText( ShuffleGame.INIT_TIME ) ;</span>
+<span class="fc" id="L48">        timer_.start() ;</span>
+<span class="fc" id="L49">    }</span>
+    
+    public void pause()
+    {
+<span class="fc" id="L53">        timer_.stop() ;</span>
+<span class="fc" id="L54">    }</span>
+    
+    public void enable()
+    {
+<span class="fc" id="L58">        timer_.start() ;</span>
+<span class="fc" id="L59">    }</span>
+    
+    public void stop()
+    {
+<span class="fc" id="L63">        timer_.stop() ;</span>
+<span class="fc" id="L64">        initCounter() ;</span>
+<span class="fc" id="L65">    }</span>
+    public void actionPerformed( ActionEvent e )
+    {
+<span class="fc" id="L68">        secondsCounterLabel.setText( getMinitueString( ++counter ) ) ;</span>
+<span class="fc" id="L69">    }</span>
+    
+    public int getTimeElapsedInSeconds()
+    {
+<span class="fc" id="L73">        return counter ;</span>
+    }
+    
+    public String getTimeElapsed()
+    {
+<span class="fc" id="L78">        int min = counter / 60 ;</span>
+<span class="fc" id="L79">        int sec = counter - ( min * 60 ) ;</span>
+<span class="fc" id="L80">        text_ = new StringBuffer() ;</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if( min &lt; 1 )</span>
+<span class="fc" id="L82">            text_.append( 0 ) ;</span>
+<span class="fc" id="L83">        text_.append( min ) ;</span>
+<span class="fc" id="L84">        text_.append( &quot; Minutes &amp; &quot;) ;</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        if( sec &lt; 10 )</span>
+<span class="fc" id="L86">            text_.append( 0 ) ;</span>
+<span class="fc" id="L87">        text_.append( sec ) ;</span>
+<span class="fc" id="L88">        text_.append( &quot; Seconds &quot; ) ;</span>
+<span class="fc" id="L89">        return text_.toString() ;</span>
+    }
+    
+    public String getMinitueString( int seconds )
+    {
+<span class="fc" id="L94">        int min = seconds / 60 ;</span>
+<span class="fc" id="L95">        int sec = seconds - ( min * 60 ) ;</span>
+<span class="fc" id="L96">        text_ = new StringBuffer() ;</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        if( min &lt; 1 )</span>
+<span class="fc" id="L98">            text_.append( 0 ) ;</span>
+<span class="fc" id="L99">        text_.append( min ) ;</span>
+<span class="fc" id="L100">        text_.append( &quot; : &quot;) ;</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if( sec &lt; 10 )</span>
+<span class="fc" id="L102">            text_.append( 0 ) ;</span>
+<span class="fc" id="L103">        text_.append( sec ) ;</span>
+<span class="fc" id="L104">        return text_.toString() ;</span>
+    }
+    
+    public void finalize()
+    {
+<span class="fc" id="L109">        timer_ = null ;</span>
+<span class="fc" id="L110">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span>Java03_Shuffle (Jan 16, 2022 9:29:23 PM)</div></body></html>
